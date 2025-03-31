@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Collaboration Platform</title>
+    <!-- FullCalendar Dependencies -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/main.min.css' rel='stylesheet' />
+    <!-- Other Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>StudentCollab</span>
+            </div>
+            <ul class="nav-links">
+                <li class="active"><a href="#dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="#chat"><i class="fas fa-comments"></i> Chat</a></li>
+                <li><a href="#meetings"><i class="fas fa-video"></i> Meetings</a></li>
+                <li><a href="#tasks"><i class="fas fa-tasks"></i> Tasks</a></li>
+                <li><a href="#calendar"><i class="fas fa-calendar"></i> Calendar</a></li>
+                <li><a href="#worklog"><i class="fas fa-clipboard-list"></i> Work Log</a></li>
+                <li><a href="#resources"><i class="fas fa-folder"></i> Resources</a></li>
+                <li><a href="#profile"><i class="fas fa-user"></i> Profile</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-buttons">
+                    <div class="google-drive-btn">
+                        <a href="https://drive.google.com" target="_blank" class="drive-link">
+                            <i class="fab fa-google-drive"></i>
+                            <span>Google Drive</span>
+                        </a>
+                    </div>
+                    <div class="link-input-container">
+                        <button class="add-link-btn">
+                            <i class="fas fa-link"></i> Add Link
+                        </button>
+                        <div class="link-input-form hidden">
+                            <input type="text" id="linkInput" placeholder="Enter URL...">
+                            <button class="save-link-btn">Save</button>
+                            <button class="cancel-link-btn">Cancel</button>
+                        </div>
+                    </div>
+                    <button class="add-member-btn">
+                        <i class="fas fa-user-plus"></i>
+                        Add Member
+                    </button>
+                </div>
+                <div class="user-controls">
+                    <div class="notifications">
+                        <i class="far fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://i.pravatar.cc/150?img=12" alt="User avatar">
+                        <span class="status-indicator online"></span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Project Overview Section -->
+                <section class="project-overview">
+                    <h2>Project Overview</h2>
+                    <div class="project-info">
+                        <h3>Web Development Project</h3>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> Due: Dec 15, 2024</span>
+                            <span><i class="fas fa-users"></i> 5 Members</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <button class="action-btn new-task">
+                        <i class="fas fa-plus"></i> New Task
+                    </button>
+                    <button class="action-btn start-meeting">
+                        <i class="fas fa-video"></i> Start Meeting
+                    </button>
+                    <button class="action-btn add-resource">
+                        <i class="fas fa-file-upload"></i> Add Resource
+                    </button>
+                </div>
+
+                <!-- Main Grid Layout -->
+                <div class="content-grid">
+                    <div class="calendar-section">
+                        <div class="calendar-widget">
+                            <h3>Team Calendar</h3>
+                            <div id="calendar"></div>
+                        </div>
+                    </div>
+
+                    <div class="right-sidebar">
+                        <div class="task-manager">
+                            <h2>Tasks</h2>
+                            <div class="task-count">0/0 tasks completed</div>
+                            <div class="task-list">
+                                <!-- Task items will be dynamically added here -->
+                            </div>
+                        </div>
+                        
+                        <div class="chat-section">
+                            <h2>Team Chat</h2>
+                            <div class="chat-container">
+                                <div class="chat-list">
+                                    <div class="chat-item active" data-user="John Doe">
+                                        <div class="chat-avatar">
+                                            <img src="images/student1.png" alt="John Doe">
+                                            <div class="status-indicator online"></div>
+                                        </div>
+                                        <div class="chat-info">
+                                            <div class="chat-header">
+                                                <span class="chat-name">John Doe</span>
+                                                <span class="chat-time">2m ago</span>
+                                            </div>
+                                            <div class="chat-preview">Hey, how's the project going?</div>
+                                        </div>
+                                    </div>
+                                    <div class="chat-item" data-user="Jane Smith">
+                                        <div class="chat-avatar">
+                                            <img src="images/student2.png" alt="Jane Smith">
+                                            <div class="status-indicator offline"></div>
+                                        </div>
+                                        <div class="chat-info">
+                                            <div class="chat-header">
+                                                <span class="chat-name">Jane Smith</span>
+                                                <span class="chat-time">1h ago</span>
+                                            </div>
+                                            <div class="chat-preview">Working on the backend</div>
+                                        </div>
+                                    </div>
+                                    <div class="chat-item" data-user="Mike Johnson">
+                                        <div class="chat-avatar">
+                                            <img src="images/student3.png" alt="Mike Johnson">
+                                            <div class="status-indicator offline"></div>
+                                        </div>
+                                        <div class="chat-info">
+                                            <div class="chat-header">
+                                                <span class="chat-name">Mike Johnson</span>
+                                                <span class="chat-time">30m ago</span>
+                                            </div>
+                                            <div class="chat-preview">Working on the documentation</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chat-messages">
+                                    <div class="messages-container">
+                                        <!-- Messages will be dynamically added here -->
+                                    </div>
+                                    <div class="message-input">
+                                        <input type="text" placeholder="Type a message...">
+                                        <button class="send-btn">
+                                            <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="worklog-section">
+                            <h2>Work Log</h2>
+                            <div class="worklog-entries">
+                                <!-- Work log entries will be dynamically added here -->
+                            </div>
+                        </div>
+
+                        <div class="resources-section">
+                            <h2>Resources</h2>
+                            <div class="resources-list">
+                                <!-- Resources will be dynamically added here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    
+    <!-- Video Meeting Container -->
+    <div id="video-meeting-container" class="video-meeting-container hidden">
+        <div class="meeting-header">
+            <div class="meeting-title">
+                <h2>Team Meeting</h2>
+                <span class="meeting-time">00:00:00</span>
+            </div>
+            <div class="meeting-tabs">
+                <button class="tab-btn active" data-tab="video">
+                    <i class="fas fa-video"></i> Video
+                </button>
+                <button class="tab-btn" data-tab="chat">
+                    <i class="fas fa-comments"></i> Chat
+                </button>
+                <button class="tab-btn" data-tab="transcript">
+                    <i class="fas fa-file-alt"></i> Transcript
+                </button>
+            </div>
+        </div>
+        <div class="meeting-content">
+            <div class="tab-content active" id="video-tab">
+                <div class="video-grid">
+                    <div class="local-video-container">
+                        <video id="localVideo" autoplay playsinline muted></video>
+                        <div class="video-controls">
+                            <button id="toggleVideo" class="control-btn"><i class="fas fa-video"></i></button>
+                            <button id="toggleAudio" class="control-btn"><i class="fas fa-microphone"></i></button>
+                            <button id="toggleScreen" class="control-btn"><i class="fas fa-desktop"></i></button>
+                            <button id="endCall" class="control-btn end-call"><i class="fas fa-phone-slash"></i></button>
+                        </div>
+                    </div>
+                    <div id="remoteVideos" class="remote-videos">
+                        <!-- Remote videos will be added here dynamically -->
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" id="chat-tab">
+                <div class="meeting-chat">
+                    <div class="chat-messages" id="meetingChatMessages">
+                        <!-- Chat messages will be added here -->
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" placeholder="Type a message...">
+                        <button class="send-btn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" id="transcript-tab">
+                <div class="transcript-container">
+                    <div class="transcript-header">
+                        <button id="startRecording" class="transcript-btn">
+                            <i class="fas fa-record-vinyl"></i> Start Recording
+                        </button>
+                        <button id="generateTranscript" class="transcript-btn" disabled>
+                            <i class="fas fa-magic"></i> Generate AI Transcript
+                        </button>
+                    </div>
+                    <div class="transcript-content">
+                        <div class="transcript-text" id="transcriptText">
+                            <!-- Transcript will be added here -->
+                        </div>
+                        <div class="transcript-summary" id="transcriptSummary">
+                            <!-- AI-generated summary will be added here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
